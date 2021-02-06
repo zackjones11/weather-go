@@ -25,11 +25,12 @@ func DetailHandler(weather *Client) http.HandlerFunc {
 
 		params := url.Query()
 		locationQuery := params.Get("l")
-
-		response := &Weather{
-			Main: "Cloudy in" + locationQuery,
-			Description: "Lorem ipsum",
+		results, err := weather.GetWeather(locationQuery)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
-		tpl.Execute(w, response)
+
+		tpl.Execute(w, results.Weather[0])
 	}
 }
