@@ -22,9 +22,10 @@ func main() {
 	}
 
 	client := &http.Client{Timeout: 10 * time.Second}
-	weather.NewClient(client, apiKey)
+	weatherAPI := weather.NewClient(client, apiKey)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", weather.SearchHandler)
+	mux.HandleFunc("/weather", weather.DetailHandler(weatherAPI))
 	http.ListenAndServe(":8080", mux)
 }
