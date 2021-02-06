@@ -1,6 +1,9 @@
 package weather
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -24,4 +27,27 @@ type Weather struct {
 // NewClient creates and returns a new Client instance for making requests to the Weather API
 func NewClient(httpClient *http.Client, key string) *Client {
 	return &Client{httpClient, key}
+}
+
+// GetWeather fetches the current weather for a given location
+func (c *Client) GetWeather(location string) (*Response, error) {
+	url := "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + c.key
+	response, err := c.http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if response.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf(string(body))
+	}
+
+	responseObject := &Response{}
+	return responseObject, json.Unmarshal(body, responseObject)
 }
