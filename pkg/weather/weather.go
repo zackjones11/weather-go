@@ -2,9 +2,18 @@ package weather
 
 import (
 	"html/template"
+	"math"
 	"net/http"
 	"net/url"
 )
+
+// Details contains info to give the template
+type Details struct {
+	TempActual  float64
+	Description string
+	IconName    string
+	Location    string
+}
 
 // SearchHandler handles the request to begin searching for weather by location
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +40,14 @@ func DetailHandler(weather *Client) http.HandlerFunc {
 			return
 		}
 
-		t.Execute(w, results.Weather[0])
+		weatherDetails := &Details{
+			TempActual:  math.Round(results.Main.Temp),
+			Description: results.Weather[0].Description,
+			IconName:    results.Weather[0].Main,
+			Location:    results.Location,
+		}
+
+		t.Execute(w, weatherDetails)
 	}
 }
 
