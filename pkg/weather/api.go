@@ -15,13 +15,20 @@ type Client struct {
 
 // Response contains the whole response from the API
 type Response struct {
-	Weather []Weather `json:"weather"`
+	Weather  []Weather `json:"weather"`
+	Main     Main      `json:"main"`
+	Location string    `json:"name"`
 }
 
 // Weather contains the information for the weather requested
 type Weather struct {
 	Main        string `json:"main"`
 	Description string `json:"description"`
+}
+
+// Main contains tempatures from the weather requested
+type Main struct {
+	Temp float64 `json:"temp"`
 }
 
 // NewClient creates and returns a new Client instance for making requests to the Weather API
