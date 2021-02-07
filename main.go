@@ -36,7 +36,7 @@ func main() {
 	assetsFs := http.FileServer(http.Dir("public/assets"))
 	mux := http.NewServeMux()
 	mux.Handle("/assets/", http.StripPrefix("/assets/", assetsFs))
-	mux.HandleFunc("/", weather.SearchHandler)
+	mux.HandleFunc("/", weather.SearchHandler(photoAPI))
 	mux.HandleFunc("/weather", weather.DetailHandler(photoAPI, weatherAPI))
 	http.ListenAndServe(":8080", mux)
 }

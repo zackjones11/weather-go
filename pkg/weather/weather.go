@@ -9,8 +9,13 @@ import (
 	"github.com/zackjones11/weather-go/pkg/photo"
 )
 
-// Details contains info to give the template
-type Details struct {
+// SearchContext contains info to give the search template
+type SearchContext struct {
+	BackgroundImage string
+}
+
+// DetailContext contains info to give the detail template
+type DetailContext struct {
 	TempActual      float64
 	Description     string
 	IconName        string
@@ -19,9 +24,22 @@ type Details struct {
 }
 
 // SearchHandler handles the request to begin searching for weather by location
-func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	t := loadTemplate(w, "search.html")
-	t.Execute(w, nil)
+func SearchHandler(photo *photo.Client) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		t := loadTemplate(w, "search.html")
+
+		photoResults, err := photo.GetRandomPhoto("Captials")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		context := &SearchContext{
+			BackgroundImage: photoResults.Urls.Regular,
+		}
+
+		t.Execute(w, context)
+	}
 }
 
 // DetailHandler handles the request to display the weather for a specific location
@@ -49,7 +67,7 @@ func DetailHandler(photo *photo.Client, weather *Client) http.HandlerFunc {
 			return
 		}
 
-		weatherDetails := &Details{
+		context := &DetailContext{
 			TempActual:      math.Round(results.Main.Temp),
 			Description:     results.Weather[0].Description,
 			IconName:        results.Weather[0].Main,
@@ -57,7 +75,7 @@ func DetailHandler(photo *photo.Client, weather *Client) http.HandlerFunc {
 			BackgroundImage: photoResults.Urls.Regular,
 		}
 
-		t.Execute(w, weatherDetails)
+		t.Execute(w, context)
 	}
 }
 
