@@ -1,0 +1,22 @@
+:root {
+  --black-opacity-60: rgb(0 0 0 / 60%);
+  --off-white: #f2f2f2;
+
+  --primary-color: var(--off-white);
+
+  --weight-light: 100;
+  --weight-normal: 400;
+  --weight-bold: 700;
+
+  --font-roboto: 'Roboto', sans-serif;
+
+  --primary-font-family: var(--font-roboto);
+  --primary-font-weight: var(--weight-normal);
+}
+
+body {
+  font-family: var(--primary-font-family);
+  background-color: var(--off-black);
+  color: var(--primary-color);
+  font-weight: var(--primary-font-weight);
+}

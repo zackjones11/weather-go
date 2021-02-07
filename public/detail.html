@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/assets/root.css">
+  <link rel="stylesheet" type="text/css" href="/assets/detail.css">
   <title>Weather in {{.Location}}</title>
 </head>
 <body>
-  <div class="c-darken-overlay"></div>
+  <div class="c-container">
+      <span class="c-temp">
+        {{.TempActual}} <span class="c-icon-degree">&#176;</span>
+      </span>
 
-  <div class="c-temp">
-    <p class="c-temp__text">
-      {{.TempActual}}
-    </p>
-  </div>
-
-  <div class="c-summary">
-    <p class="c-summary__text">
+    <h1 class="c-summary">
       {{.Description}} in {{.Location}}
-    </p>
-  </div>
-
-  <div class="c-weather-icon">
-      <i class="c-weather-icon__icon g-icon-{{.IconName}}"></i>
+    </h1>
   </div>
 </body>
 </html> 
