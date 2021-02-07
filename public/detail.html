@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Weather in {{.Location}}</title>
 </head>
 <body>
-  <h3>{{.Main}}</h3>
-  <p>{{.Description}}</p>
+  <div class="c-darken-overlay"></div>
+
+  <div class="c-temp">
+    <p class="c-temp__text">
+      {{.TempActual}}
+    </p>
+  </div>
+
+  <div class="c-summary">
+    <p class="c-summary__text">
+      {{.Description}} in {{.Location}}
+    </p>
+  </div>
+
+  <div class="c-weather-icon">
+      <i class="c-weather-icon__icon g-icon-{{.IconName}}"></i>
+  </div>
 </body>
 </html> 
