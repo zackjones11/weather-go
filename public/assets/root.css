@@ -25,6 +25,8 @@ body {
   background-color: var(--off-black);
   color: var(--primary-color);
   font-weight: var(--primary-font-weight);
+  background-size: cover;
+  background-position: top;
 }
 
 .g-container {
