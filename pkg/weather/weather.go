@@ -17,7 +17,7 @@ type Details struct {
 
 // SearchHandler handles the request to begin searching for weather by location
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	t := loadTemplate(w, "index.html")
+	t := loadTemplate(w, "search.html")
 	t.Execute(w, nil)
 }
 
