@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700&display=swap');
 
 :root {
+  --white: #ffffff;
   --black-opacity-60: rgb(0 0 0 / 60%);
   --off-white: #f2f2f2;
+  --grey: #353535;
+  --red: #ff385c;
+  --red-dark: #e82044;
 
   --primary-color: var(--off-white);
 
@@ -21,4 +25,18 @@ body {
   background-color: var(--off-black);
   color: var(--primary-color);
   font-weight: var(--primary-font-weight);
+}
+
+.g-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--black-opacity-60);
 }

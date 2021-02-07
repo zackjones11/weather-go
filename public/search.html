@@ -8,8 +8,11 @@
   <title>Weather</title>
 </head>
 <body>
-  <form action="/weather" method="GET">
-    <input class="c-search-input" type="search" name="l" placeholder="Location name" />
-  </form>
+  <div class="g-container">
+    <form  class="c-form" action="/weather" method="GET">
+      <input class="c-form__input" type="search" required name="l" placeholder="Location name" />
+      <button class="c-form__submit" type="submit">GO</button>
+    </form>
+  </div>
 </body>
 </html> 
