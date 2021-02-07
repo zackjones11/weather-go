@@ -38,7 +38,7 @@ func NewClient(httpClient *http.Client, key string) *Client {
 
 // GetWeather fetches the current weather for a given location
 func (c *Client) GetWeather(location string) (*Response, error) {
-	url := "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + c.key
+	url := "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + c.key + "&units=metric"
 	response, err := c.http.Get(url)
 	if err != nil {
 		return nil, err
