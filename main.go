@@ -24,7 +24,9 @@ func main() {
 	client := &http.Client{Timeout: 10 * time.Second}
 	weatherAPI := weather.NewClient(client, apiKey)
 
+	assetsFs := http.FileServer(http.Dir("public/assets"))
 	mux := http.NewServeMux()
+	mux.Handle("/assets/", http.StripPrefix("/assets/", assetsFs))
 	mux.HandleFunc("/", weather.SearchHandler)
 	mux.HandleFunc("/weather", weather.DetailHandler(weatherAPI))
 	http.ListenAndServe(":8080", mux)
